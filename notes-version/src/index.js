@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import StarMatch from './components/StarMatchApp';
+import StarMatchApp from './components/StarMatchApp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StarMatch />
+    <StarMatchApp />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -13,13 +13,14 @@ const useGameState = (buttonNums) => {
 
     // if you use a side effect, you should always return a clean up of the effect
     // there is a bug here where repeatedly clicking a button stalls the timer... the tutorial skips fixing it
-    // useCallback function can be used to fix it based on reading but no idea what syntax to use
+    // fixed it by adding dependencies for useEffect? but based on the explanation I watched on useEffect
+    // I don't understand why adding the dependencies fixes it
     useEffect(() => {
         if (secondsLeft > 0 && availableNums.length > 0) {
             const timerId = setTimeout(() => setSecondsLeft(secondsLeft - 1), 1000);
             return () => clearTimeout(timerId);
         }
-    });
+    }, [availableNums.length, secondsLeft]);
 
     const setGameState = (newCandidateNums) => {
         // if not a correct answer
@@ -47,6 +48,7 @@ const Game = (props) => {
     // creates an array 1-9 of numbered buttons
     const buttonNums = utils.range(1, 9);
 
+    // uses the Custom Hook to handle the state and effects of the game
     const {
         stars,
         availableNums,
@@ -55,35 +57,14 @@ const Game = (props) => {
         setGameState,
     } = useGameState(buttonNums);
 
-    // determine whether the candidate numbers chosen are incorrect, returns a boolean
-    const candidatesAreWrong = utils.sum(candidateNums) > stars;
     // game is done when available numbers reaches 0
     // const gameIsWon = availableNums.length === 0;
     // const gameIsLost = secondsLeft === 0;
-
     // I don't like the nested ternary here but the tutorial to show the different versions is locked behind a paywall T-T
     // and when I tried to get two ifs to work with newCandidateNums it threw an error, so I'm gonna leave this alone
     const gameStatus = availableNums.length === 0
         ? 'won'
         : secondsLeft === 0 ? 'lost' : 'active';
-
-
-
-    // determines what playable status the button is
-    const numberStatus = (number) => {
-        if (!availableNums.includes(number)) {
-            return 'used';
-        }
-        if (candidateNums.includes(number)) {
-            if (candidatesAreWrong) {
-                return 'wrong';
-            } else {
-                return 'candidate';
-            }
-            //return candidatesAreWrong ? 'wrong' : 'candidate';
-        }
-        return 'available';
-    };
 
     // based on the current status of the number, what is the new status of the number?
     const onNumberClick = (number, currentStatus) => {
@@ -101,6 +82,25 @@ const Game = (props) => {
 
         setGameState(newCandidateNums);
     };
+
+     // determine whether the candidate numbers chosen are incorrect, returns a boolean
+     const candidatesAreWrong = utils.sum(candidateNums) > stars;
+    
+     // determines what playable status the button is
+     const numberStatus = (number) => {
+         if (!availableNums.includes(number)) {
+             return 'used';
+         }
+         if (candidateNums.includes(number)) {
+             if (candidatesAreWrong) {
+                 return 'wrong';
+             } else {
+                 return 'candidate';
+             }
+             //return candidatesAreWrong ? 'wrong' : 'candidate';
+         }
+         return 'available';
+     };
 
     return (
         <div className="game">
