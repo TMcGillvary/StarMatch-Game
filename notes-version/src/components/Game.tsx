@@ -5,10 +5,10 @@ import ButtonNumDisplay from './ButtonNumDisplay';
 import PlayAgain from './PlayAgain';
 
 // Custom Hook
-const useGameState = (buttonNums) => {
+const useGameState = (buttonNums: Array<number>) => {
     const [stars, setStars] = useState(utils.random(1, 9));
     const [availableNums, setAvailableNums] = useState(buttonNums);
-    const [candidateNums, setCandidateNums] = useState([]);
+    const [candidateNums, setCandidateNums] = useState<Array<number>>([]);
     const [secondsLeft, setSecondsLeft] = useState(10);
 
     // if you use a side effect, you should always return a clean up of the effect
@@ -22,7 +22,7 @@ const useGameState = (buttonNums) => {
         }
     }, [availableNums.length, secondsLeft]);
 
-    const setGameState = (newCandidateNums) => {
+    const setGameState = (newCandidateNums: Array<number>) => {
         // if not a correct answer
         if (utils.sum(newCandidateNums) !== stars) {
             setCandidateNums(newCandidateNums);
@@ -44,7 +44,7 @@ const useGameState = (buttonNums) => {
     return { stars, availableNums, candidateNums, secondsLeft, setGameState };
 };
 
-const Game = (props) => {
+const Game = (props: { startNewGame: React.MouseEventHandler<HTMLButtonElement> | undefined; }) => {
     // creates an array 1-9 of numbered buttons
     const buttonNums = utils.range(1, 9);
 
@@ -67,7 +67,7 @@ const Game = (props) => {
         : secondsLeft === 0 ? 'lost' : 'active';
 
     // based on the current status of the number, what is the new status of the number?
-    const onNumberClick = (number, currentStatus) => {
+    const onNumberClick = (number: number, currentStatus: string) => {
         if (gameStatus !== 'active' || currentStatus === 'used') {
             // do nothing; can't select an already used num
             return;
@@ -87,7 +87,7 @@ const Game = (props) => {
      const candidatesAreWrong = utils.sum(candidateNums) > stars;
     
      // determines what playable status the button is
-     const numberStatus = (number) => {
+     const numberStatus = (number: number) => {
          if (!availableNums.includes(number)) {
              return 'used';
          }

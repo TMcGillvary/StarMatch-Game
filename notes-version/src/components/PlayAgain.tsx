@@ -3,7 +3,7 @@ import React from "react";
 /**
 Render a Play Again button once game is completed
 */
-const PlayAgain = props => (
+const PlayAgain = (props: { gameStatus: string; onClick: React.MouseEventHandler<HTMLButtonElement> | undefined; }) => (
     <div className="game-done">
         <div
             className="message"
