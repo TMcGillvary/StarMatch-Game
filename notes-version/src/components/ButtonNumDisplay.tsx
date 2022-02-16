@@ -1,14 +1,20 @@
 import React from "react";
 
 // TODO: ask about the onClick event args
+interface numInfo {
+  status: keyof typeof colors,
+  onClick: (number: number, currentStatus: string) => void,
+  number: number,
+}
+
 /**
-Display the numbers 1-9 as clickable buttons to match the star count on the left. 
-the number range is passed into the function as a prop to display, and on click sends the number and status back to parent component
+Display the numbers 1-9 as individual clickable buttons to match the star count on the left. 
+the number is passed into the function as a prop to display, and on click sends the number and status back to parent component
 */
-const ButtonNumDisplay = (props: { status: string; onClick: (arg0: number, arg1: string) => void; number: number; }) => (
+const ButtonNumDisplay = (props: numInfo) => (
   <button
     className="number"
-    style={{ backgroundColor: colors[props.status as keyof typeof colors] }}
+    style={{ backgroundColor: colors[props.status] }}
     onClick={() => props.onClick(props.number, props.status)}
   >
     {props.number}
