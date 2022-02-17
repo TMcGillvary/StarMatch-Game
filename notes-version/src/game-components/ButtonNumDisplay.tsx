@@ -8,20 +8,6 @@ interface numInfo {
   number: number,
 }
 
-const Button = styled.button`
-    background-color: #eee;
-    border: thin solid #ddd;
-    width: 45px;
-    height: 45px;
-    margin: 10px;
-    font-size: 25px;
-
-    &:focus, &:active {
-      outline: none;
-      border: thin solid #ddd;
-    }
-`
-
 /**
 Display the numbers 1-9 as individual clickable buttons to match the star count on the left. 
 the number is passed into the function as a prop to display, and on click sends the number and status back to parent component
@@ -44,3 +30,18 @@ const colors = {
 };
 
 export default ButtonNumDisplay;
+
+/* CSS STYLING */
+const Button = styled.button`
+    background-color: #eee;
+    border: thin solid #ddd;
+    width: 45px;
+    height: 45px;
+    margin: 10px;
+    font-size: 25px;
+
+    &:focus, &:active {
+      outline: none;
+      border: thin solid #ddd;
+    }
+`

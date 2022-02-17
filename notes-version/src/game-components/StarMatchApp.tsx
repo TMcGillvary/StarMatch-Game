@@ -11,7 +11,7 @@ const StarMatch = (props: {playerName: string}) => {
 
   return (
     <>
-      <h1>Welcome, {playerName}!</h1>
+      <h1>Welcome, Player {playerName}</h1>
       <Game key={gameID} startNewGame={() => setGameID(gameID + 1)} />
 
       <br />

@@ -87,9 +87,7 @@ const Game = (props: { startNewGame: React.MouseEventHandler<HTMLButtonElement> 
 
 export default Game;
 
-/*
-* CSS Styling
-*/
+/* CSS STYLING */
 
 const Container = style.div`
     max-width: 500px;
