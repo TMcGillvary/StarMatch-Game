@@ -26,10 +26,7 @@ function HomePage() {
                 <input type="text"
                     placeholder="Enter Your Name!"
                     value={playerName}
-                    onChange={event => {
-                        setPlayerName(event.target.value)
-                    }
-                    }
+                    onChange={event => { setPlayerName(event.target.value) } }
                 />
                 <P>
                 Your Name: {playerName}
@@ -38,7 +35,6 @@ function HomePage() {
                 <PlayButton 
                     onClick={() => {
                         navigate("/game", { state: playerName }); 
-                        //setPlayerName("");
                     }} 
                     key={playerName} 
                     disabled={playerName.length <= 0} 

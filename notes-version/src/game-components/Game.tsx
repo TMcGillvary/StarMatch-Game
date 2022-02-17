@@ -100,6 +100,7 @@ const Help = style.div`
     color: #666;
     margin: 10px;
     text-align: center;
+    font-size: 1.7rem;
 `
 const LeftStars = style.div`
     text-align: center;
@@ -116,4 +117,5 @@ const Timer = style.div`
     color: #666;
     margin-top: 3px;
     margin-left: 3px;
+    font-size: 2rem;
 `

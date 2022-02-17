@@ -7,7 +7,7 @@ const useGameState = (buttonNums: Array<number>) => {
     const [stars, setStars] = useState<Array<number>>(utils.random(1, 9));
     const [availableNums, setAvailableNums] = useState(buttonNums);
     const [candidateNums, setCandidateNums] = useState<Array<number>>([]);
-    const [secondsLeft, setSecondsLeft] = useState(10);
+    const [secondsLeft, setSecondsLeft] = useState(15);
     // TODO best practice with typescript to still declare even if react/ts knows?
 
     // if you use a side effect, you should always return a clean up of the effect

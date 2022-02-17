@@ -22,10 +22,10 @@ export default StarsDisplay;
 
 const Star = styled.div`
     display: inline-block;
-    margin: 0 15px;
+    margin: 10px;
 
     &:after {
         content: "\\2605";
-        font-size: 45px;
+        font-size: 49px;
     }
 `
