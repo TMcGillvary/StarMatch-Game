@@ -4,6 +4,7 @@ import StarsDisplay from './StarsDisplay';
 import ButtonNumDisplay from './ButtonNumDisplay';
 import PlayAgain from './PlayAgain';
 import useGameState from './useGameState';
+import style from "styled-components";
 
 
 // TODO: still unfamiliar with the React types and typescript, this is what VSCode generated to fix, does this look right?
@@ -56,19 +57,19 @@ const Game = (props: { startNewGame: React.MouseEventHandler<HTMLButtonElement> 
      };
 
     return (
-        <div className="game">
-            <div className="help">
+        <Container>
+            <Help>
                 Pick 1 or more numbers that sum to the number of stars
-            </div>
-            <div className="body">
-                <div className="left-stars">
+            </Help>
+            <Body>
+                <LeftStars>
                     {gameStatus !== 'active' ? (
                         <PlayAgain onClick={props.startNewGame} gameStatus={gameStatus} />
                     ) : (
                         <StarsDisplay countOfStars={stars} />
                     )}
-                </div>
-                <div className="right-numbers">
+                </LeftStars>
+                <RightNums>
                     {buttonNums.map(number =>
                         <ButtonNumDisplay
                             key={number}
@@ -77,11 +78,44 @@ const Game = (props: { startNewGame: React.MouseEventHandler<HTMLButtonElement> 
                             onClick={onNumberClick}
                         />
                     )}
-                </div>
-            </div>
-            <div className="timer">Time Remaining: {secondsLeft}</div>
-        </div>
+                </RightNums>
+            </Body>
+            <Timer>Time Remaining: {secondsLeft}</Timer>
+        </Container>
     );
 };
 
 export default Game;
+
+/*
+* CSS Styling
+*/
+
+const Container = style.div`
+    max-width: 500px;
+    margin: 0 auto;
+`
+const Body = style.div`
+    display: flex;
+`
+const Help = style.div`
+    color: #666;
+    margin: 10px;
+    text-align: center;
+`
+const LeftStars = style.div`
+    text-align: center;
+    width: 50%;
+    border: thin solid #ddd;
+`
+const RightNums = style.div`
+    text-align: center;
+    padding: 10px;
+    width: 50%;
+    border: thin solid #ddd;
+`
+const Timer = style.div`
+    color: #666;
+    margin-top: 3px;
+    margin-left: 3px;
+`

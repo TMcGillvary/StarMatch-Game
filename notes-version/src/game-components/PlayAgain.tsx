@@ -1,16 +1,22 @@
 import React from "react";
+import styled from "styled-components";
+
+const Message = styled.div`
+    font-size: 250%;
+    font-weight: bold;
+    margin: 15px;
+`
 
 /**
 Render a Play Again button once game is completed
 */
 const PlayAgain = (props: { gameStatus: string; onClick: React.MouseEventHandler<HTMLButtonElement> | undefined; }) => (
-    <div className="game-done">
-        <div
-            className="message"
+    <div id="game-done">
+        <Message 
             style={{ color: props.gameStatus === 'lost' ? 'red' : 'green' }}
         >
             {props.gameStatus === 'lost' ? 'Game Over' : 'You Won!'}
-        </div>
+        </Message>
         <button onClick={props.onClick}>Play Again</button>
     </div>
 );
